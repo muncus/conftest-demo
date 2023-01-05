@@ -5,12 +5,12 @@ on:
     branches: [ main, gha ]
 
 jobs:
-  name: Check Testdata
-  runs-on: ubuntu-latest
-  steps:
-    - name: Check out repo
-      uses: actions/checkout@v3
-    - name: Conftest testdata
-      uses: .github/actions/conftest@gha
-      with:
-        files: "testdata/repo.pass.json"
+  checkpolicy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out repo
+        uses: actions/checkout@v3
+      - name: Conftest testdata
+        uses: .github/actions/conftest@gha
+        with:
+          files: "testdata/repo.pass.json"
