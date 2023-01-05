@@ -27,4 +27,4 @@ runs:
     - "${{ inputs.policy }}"
     - "${{ inputs.extra_args }}"
     - "--"
-    - "${{ inputs.files }}"
+    - "${{ join(fromJSON(inputs.files), " ") }}"
