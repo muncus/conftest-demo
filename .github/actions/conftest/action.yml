@@ -19,12 +19,7 @@ inputs:
 runs:
   using: 'docker'
   image: 'docker://openpolicyagent/conftest:latest'
+  entrypoint: 'sh'
   args:
-    - "test"
-    - "--output"
-    - "${{ inputs.output }}"
-    - "--policy"
-    - "${{ inputs.policy }}"
-    - "${{ inputs.extra_args }}"
-    - "--"
-    - "${{ join(fromJSON(inputs.files), ' ') }}"
+    - "-c"
+    - "conftest test --output ${{ inputs.output }} --policy ${{ inputs.policy }} ${{ inputs.extra_args }} -- ${{ inputs.files }}"
