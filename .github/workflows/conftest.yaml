@@ -13,4 +13,4 @@ jobs:
       - name: Conftest testdata
         uses: ./.github/actions/conftest
         with:
-          files: "testdata/repo.pass.json testdata/repo.fail.json"
+          files: "conftest-demo/testdata/repo.pass.json conftest-demo/testdata/repo.fail.json"
