@@ -1,0 +1,17 @@
+name: Test conftest samples
+on:
+  workflow_call:
+  push:
+    branches: [ main, gha ]
+
+jobs:
+  checkpolicy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out repo
+        uses: actions/checkout@v3
+      - name: Conftest testdata
+        uses: ./.github/actions/conftest
+        with:
+          namespace: "github.repo"
+          files: "testdata/repo.pass.json"

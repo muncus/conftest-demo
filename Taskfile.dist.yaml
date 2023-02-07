@@ -1,0 +1,37 @@
+# https://taskfile.dev
+
+version: '3'
+
+# Tasks below refer to these env variables.
+# You can either set them in your shell, or create a Taskfile.yaml that
+# includes this file.
+# env:
+#   CONFTEST_IMAGE_TAG: image-path-here
+#   CONFTEST_IMAGE_LABEL: latest
+
+tasks:
+  default:
+    cmds:
+      - echo "Try task -l to see a list of valid task names."
+    silent: true
+  regocheck:
+    desc: "locally verify rego policy."
+    cmds:
+      - opa check ./policy
+  push-bundle:
+    desc: "pushes bundle to remote OCI registry"
+    deps: [build-policy-bundle]
+    cmds:
+      # note: this oras command is wrong in the OPA docs:
+      # https://www.openpolicyagent.org/docs/latest/management-bundles/#maintaining-a-policy-as-code-repository
+      #  send them a patch.
+      # - oras push {{.IMAGE_TAG}}:latest --config config.json:application/vnd.oci.image.config.v1+json ./bundle.tar.gz:application/vnd.oci.image.layer.v1.tar+gzip
+      #  TODO: switch to conftest push? this format is not working.
+      - conftest push ${CONFTEST_IMAGE_TAG}:${CONFTEST_IMAGE_LABEL}
+  conftest:
+    desc: "locally run conftest with the policy from OCI registry"
+    cmds:
+      - echo conftest test --update oci://${CONFTEST_IMAGE_TAG}:${CONFTEST_IMAGE_LABEL} -p {{.POLICY_DIR}} {{.CLI_ARGS}}
+    vars:
+      POLICY_DIR:
+        sh: mktemp -d
