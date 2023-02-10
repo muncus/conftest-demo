@@ -1,8 +1,6 @@
 name: Test conftest samples
 on:
   workflow_call:
-  push:
-    branches: [ main, gha ]
   pull_request:
     branches: [ main, gha ]
 
