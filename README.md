@@ -33,6 +33,20 @@ gh api /repos/${OWNER}/${REPO} | conftest test -n github.repo -
 
 Note the trailing `-`, which tells conftest to read from stdin.
 
+#### Namespace: `github.branch_protection`
+
+**Input**: The json representation of github branch protection rules, as
+described by [github api docs for
+branch protection](https://docs.github.com/en/rest/branches/branch-protection?apiVersion=2022-11-28#get-branch-protection)
+
+Try out these policies with the following command:
+
+```
+gh api /repos/${OWNER}/${REPO}/branches/${BRANCH}/protection | conftest test -n github.branch_protection -
+```
+
+NOTE: branch protection requires admin permissions on the repo in question.
+
 #### Namespace: `renovate`
 
 **Input**: The contents of a [renovatebot config
