@@ -19,8 +19,16 @@ extends_weekly {
 # Renovate configs should group non-major updates
 warn_group_nonmajor contains msg if {
   not extends_group_nonmajor
+  not major_disabled_all_grouped
   msg := "Does not group minor/patch updates. Consider extending 'group:AllNonMajor'."
 }
 extends_group_nonmajor {
   input.extends[_] == "group:AllNonMajor"
+}
+major_disabled_all_grouped {
+  some i
+  input.packageRules[i].enabled == false
+  input.packageRules[i].updateTypes[_] == "major"
+  # non-zero length string
+  count(input.groupName) > 0
 }
