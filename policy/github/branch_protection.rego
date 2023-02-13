@@ -35,3 +35,9 @@ deny_owner_review contains msg if {
   input.required_pull_request_reviews.require_code_owner_reviews != true
 }
 
+# This repo does not currently meet the owner_review requirement.
+exception contains m if {
+  m = ["owner_review"]
+  contains(lower(input.url), "googlecloudplatform/cloud-run-microservice-template-go")
+}
+
