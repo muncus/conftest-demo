@@ -11,12 +11,12 @@ jobs:
       - name: Check out repo
         uses: actions/checkout@v3
       - name: Conftest testdata/repo
-        uses: ./.github/actions/conftest
+        uses: instrumenta/conftest-action@v0.4.0
         with:
           namespace: "github.repo"
           files: "testdata/repo.pass.json"
       - name: Conftest testdata/renovate
-        uses: ./.github/actions/conftest
+        uses: instrumenta/conftest-action@v0.4.0
         with:
           namespace: "renovate"
           files: "testdata/renovate.json"
@@ -26,7 +26,8 @@ jobs:
           https://api.github.com/repos/${{ github.repository}}
           -H "Authorization: Bearer ${{ github.token }}"\
       - name: Check Current Repository settings
-        uses: ./.github/actions/conftest
+        uses: instrumenta/conftest-action@v0.4.0
+        with:
         with:
           namespace: "github.repo"
           files: "repository.json"
