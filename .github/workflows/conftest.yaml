@@ -11,27 +11,22 @@ jobs:
       - name: Check out repo
         uses: actions/checkout@v3
       - name: Conftest testdata/repo
-        run: >
-          conftest test
-          -o github
-          --namespace github.repo
-          testdata/repo.pass.json
+        uses: muncus/conftest-action@main
+        with:
+          namespace: "github.repo"
+          files: "testdata/repo.pass.json"
       - name: Conftest testdata/renovate
-        uses: docker://openpolicyagent/conftest:latest
-        run: >
-          conftest test
-          -o github
-          --namespace renovate
-          testdata/renovate.json
+        uses: muncus/conftest-action@main
+        with:
+          namespace: "renovate"
+          files: "testdata/renovate.json"
       - name: Get current repo
         run: >
           curl -o repository.json
           https://api.github.com/repos/${{ github.repository}}
           -H "Authorization: Bearer ${{ github.token }}"\
       - name: Check Current Repository settings
-        uses: docker://openpolicyagent/conftest:latest
-        run: >
-          conftest test
-          -o github
-          --namespace github.repo
-          repository.json
+        uses: muncus/conftest-action@main
+        with:
+          namespace: "github.repo"
+          files: "repository.json"
