@@ -7,26 +7,30 @@ on:
 jobs:
   checkpolicy:
     runs-on: ubuntu-latest
+    container: openpolicyagent/conftest:latest
     steps:
       - name: Check out repo
         uses: actions/checkout@v3
       - name: Conftest testdata/repo
-        uses: instrumenta/conftest-action@v0.4.0
-        with:
-          namespace: "github.repo"
-          files: "testdata/repo.pass.json"
+        run: >
+          conftest test
+          -o github
+          --namespace github.repo
+          testdata/repo.pass.json
       - name: Conftest testdata/renovate
-        uses: instrumenta/conftest-action@v0.4.0
-        with:
-          namespace: "renovate"
-          files: "testdata/renovate.json"
+        run: >
+          conftest test
+          -o github
+          --namespace renovate
+          testdata/renovate.json
       - name: Get current repo
         run: >
           curl -o repository.json
           https://api.github.com/repos/${{ github.repository}}
           -H "Authorization: Bearer ${{ github.token }}"\
       - name: Check Current Repository settings
-        uses: instrumenta/conftest-action@v0.4.0
-        with:
-          namespace: "github.repo"
-          files: "repository.json"
+        run: >
+          conftest test
+          -o github
+          --namespace github.repo
+          repository.json
