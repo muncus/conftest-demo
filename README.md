@@ -1,17 +1,24 @@
 # Demo: Using Conftest to create consistency across a large organization
 
-Conftest (http://conftest.dev) can be used to add lightweight "validation" on
+Conftest (http://conftest.dev) can be used to add lightweight validation on
 many kinds of structured data. These types of validations are critical for large
-organizations, where Best Practices(tm) often change over time - making
-consistent enforcement difficult.
+organizations, where managing Best Practices(tm) across multiple repositories
+can prove challenging.
 
 This repo shows how an organization might use conftest to validate a variety of
-checks across different repositories using github actions.
+checks across different repositories using github actions. To do this, we need a
+few different pieces:
 
-The Workflows and Actions provided here are provided as a demonstration. The
-Action will need to be hosted in its own repository in order to be reusable by
-other repositories, as described in [About Custom
-Actions](https://docs.github.com/en/actions/creating-actions/about-custom-actions#choosing-a-location-for-your-action) in the GHA docs.
+* **Policy Repo** - This repository holds all the Rego rules to do the policy
+  checking, as well as any [exceptions](https://www.conftest.dev/exceptions/).
+  Policies are discussed in greater detail below.
+
+* [**Conftest Action**](http://github.com/muncus/conftest-action) - Optional,
+  but I find this an easier way to run conftest. It is possible to [run conftest
+  directly](https://www.conftest.dev/options/#github) in GHA if you prefer.
+
+* [**Github
+  Workflow**](https://github.com/muncus/conftest-demo/blob/main/.github/workflows/conftest.yaml) - This workflow demonstrates how to check out the policy repo as well as a repo under test, and perform some policy checks.
 
 ## Policies
 
@@ -32,6 +39,9 @@ gh api /repos/${OWNER}/${REPO} | conftest test -n github.repo -
 ```
 
 Note the trailing `-`, which tells conftest to read from stdin.
+
+If you do not have the github CLI (`gh`) installed, you can get similar results
+with `curl`. See the Github API docs for more information.
 
 #### Namespace: `github.branch_protection`
 
