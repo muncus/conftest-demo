@@ -17,6 +17,12 @@ jobs:
         with:
           repository: muncus/conftest-demo
           path: $POLICY_REPO_BASEDIR
+      - name: Get current repo
+        run: |
+          echo $GITHUB_WORKSPACE
+          ls $GITHUB_WORKSPACE
+          echo $GITHUB_WORKSPACE/org-policy
+          ls $GITHUB_WORKSPACE/org-policy
       - name: Conftest testdata/repo
         uses: muncus/conftest-action@main
         with:
