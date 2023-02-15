@@ -2,7 +2,7 @@ name: Test conftest samples
 on:
   workflow_call:
   pull_request:
-    branches: [ main, gha ]
+    branches: [ main ]
 
 jobs:
   checkpolicy:
