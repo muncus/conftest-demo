@@ -1,4 +1,4 @@
-name: Test conftest samples
+name: Policy Checks
 on:
   workflow_call:
   pull_request:
