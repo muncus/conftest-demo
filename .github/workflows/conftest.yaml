@@ -7,8 +7,6 @@ on:
 jobs:
   checkpolicy:
     runs-on: ubuntu-latest
-    env:
-      POLICY_REPO_BASEDIR: "org-policy"
     steps:
       - name: Check out repo
         uses: actions/checkout@v3
@@ -16,25 +14,19 @@ jobs:
         uses: actions/checkout@v3
         with:
           repository: muncus/conftest-demo
-          path: $POLICY_REPO_BASEDIR
-      - name: Get current repo
-        run: |
-          echo $GITHUB_WORKSPACE
-          ls $GITHUB_WORKSPACE
-          echo $GITHUB_WORKSPACE/org-policy
-          ls $GITHUB_WORKSPACE/org-policy
+          path: org-policy-repo
       - name: Conftest testdata/repo
         uses: muncus/conftest-action@main
         with:
           namespace: "github.repo"
           files: "testdata/repo.pass.json"
-          policy: $POLICY_REPO_BASEDIR/policy
+          policy: org-policy-repo/policy
       - name: Conftest testdata/renovate
         uses: muncus/conftest-action@main
         with:
           namespace: "renovate"
           files: "testdata/renovate.json"
-          policy: $POLICY_REPO_BASEDIR/policy
+          policy: org-policy-repo/policy
       - name: Get current repo
         run: >
           curl -o repository.json
@@ -45,4 +37,4 @@ jobs:
         with:
           namespace: "github.repo"
           files: "repository.json"
-          policy: $POLICY_REPO_BASEDIR/policy
+          policy: org-policy-repo/policy
