@@ -4,13 +4,13 @@ package github.repo
 import future.keywords
 
 # delete PR branches once they are merged.
-fail_delete_merged_branches[msg]{
+deny_delete_merged_branches[msg]{
   input.delete_branch_on_merge != true
   msg := "Consider enabling 'delete branch on merge' in your repo settings"
 }
 
 # Suggest updating branches that require syncing.
-fail_update_branch_button[msg]{
+deny_update_branch_button[msg]{
   input.allow_update_branch == false
   msg := "Consider enabling the 'suggest updating pull request branches' option in repo settings."
 }
