@@ -38,4 +38,10 @@ jobs:
           namespace: "github.repo"
           files: "repository.json"
           policy: org-policy-repo/policy/global
+      - name: Check Repository settings for :donut: team
+        uses: muncus/conftest-action@main
+        with:
+          namespace: "github.repo"
+          files: "repository.json"
+          policy: org-policy-repo/policy/global
           extra_args: "-p org-policy-repo/policy/teams/donut"

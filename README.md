@@ -26,6 +26,14 @@ The policies provided here are some examples of using conftest. Before trying
 them out with Github Actions, you can test them out from the commandline. Each
 namespace expects a different input, and is described below.
 
+The main policies are located in the `policy/global` directory, organized by
+namespace. To illustrate per-team namespaces, a `policy/teams` directory exists,
+where teams may place additional rules, either in the same namespace, or create
+namespaces of their own. To use these additional policies, the team directory
+must be passed to conftest with the `--policy` flag. When using the Github
+action (as illustrated in the workflow above), this is done through the
+`extra_args` input.
+
 #### Namespace: `github.repo`
 
 **Input**: The json representation of a github Repository, as described in the
