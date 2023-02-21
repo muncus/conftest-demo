@@ -1,13 +1,16 @@
+# Extensions to the github.repo namespace specific to the Donut team.
 package github.repo
 
+import future.keywords
+
 # delete PR branches once they are merged.
-warn_delete_merged_branches[msg]{
+fail_delete_merged_branches[msg]{
   input.delete_branch_on_merge != true
   msg := "Consider enabling 'delete branch on merge' in your repo settings"
 }
 
-# Should suggest updating branches that require syncing.
-warn_update_branch_button[msg]{
+# Suggest updating branches that require syncing.
+fail_update_branch_button[msg]{
   input.allow_update_branch == false
   msg := "Consider enabling the 'suggest updating pull request branches' option in repo settings."
 }
