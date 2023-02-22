@@ -1,9 +1,11 @@
 # Demo: Using Conftest to create consistency across a large organization
 
-Conftest (http://conftest.dev) can be used to add lightweight validation on
-many kinds of structured data. These types of validations are critical for large
-organizations, where managing Best Practices(tm) across multiple repositories
-can prove challenging.
+Conftest (http://conftest.dev) can be used to add lightweight validation on many
+kinds of structured data. These validations are written in
+[Rego](https://www.openpolicyagent.org/docs/latest/policy-language/), which also
+powers the [Open Policy Agent](openpolicyagent.org). This type of validation can
+be critical for larger organizations, where managing recommended practices
+across multiple repositories can prove challenging.
 
 This repo shows how an organization might use conftest to validate a variety of
 checks across different repositories using github actions. To do this, we need a
