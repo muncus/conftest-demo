@@ -27,12 +27,12 @@ them out with Github Actions, you can test them out from the commandline. Each
 namespace expects a different input, and is described below.
 
 The main policies are located in the `policy/global` directory, organized by
-namespace. To illustrate per-team namespaces, a `policy/teams` directory exists,
-where teams may place additional rules, either in the same namespace, or create
-namespaces of their own. To use these additional policies, the team directory
-must be passed to conftest with the `--policy` flag. When using the Github
-action (as illustrated in the workflow above), this is done through the
-`extra_args` input.
+namespace. To illustrate per-team namespaces, a `policy/donut-team` directory
+exists, where the fictional Donut Team can add additional checks, either in the
+same namespace, or create namespaces of their own. To use these additional
+policies, this team directory must be passed to conftest with the `--policy`
+flag. When using the Github action (as illustrated in the workflow above), this
+is done through the `extra_args` input.
 
 #### Namespace: `github.repo`
 
