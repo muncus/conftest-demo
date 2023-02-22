@@ -20,13 +20,13 @@ jobs:
         with:
           namespace: "github.repo"
           files: "testdata/repo.pass.json"
-          policy: org-policy-repo/policy
+          policy: org-policy-repo/policy/global
       - name: Conftest testdata/renovate
         uses: muncus/conftest-action@main
         with:
           namespace: "renovate"
           files: "testdata/renovate.json"
-          policy: org-policy-repo/policy
+          policy: org-policy-repo/policy/global
       - name: Get current repo
         run: >
           curl -o repository.json
@@ -37,4 +37,11 @@ jobs:
         with:
           namespace: "github.repo"
           files: "repository.json"
-          policy: org-policy-repo/policy
+          policy: org-policy-repo/policy/global
+      - name: Check Repository settings for donut team
+        uses: muncus/conftest-action@main
+        with:
+          namespace: "github.repo"
+          files: "repository.json"
+          policy: org-policy-repo/policy/global
+          extra_args: "--policy org-policy-repo/policy/donut-team"

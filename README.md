@@ -1,9 +1,11 @@
 # Demo: Using Conftest to create consistency across a large organization
 
-Conftest (http://conftest.dev) can be used to add lightweight validation on
-many kinds of structured data. These types of validations are critical for large
-organizations, where managing Best Practices(tm) across multiple repositories
-can prove challenging.
+Conftest (http://conftest.dev) can be used to add lightweight validation on many
+kinds of structured data. These validations are written in
+[Rego](https://www.openpolicyagent.org/docs/latest/policy-language/), which also
+powers the [Open Policy Agent](openpolicyagent.org). This type of validation can
+be critical for larger organizations, where managing recommended practices
+across multiple repositories can prove challenging.
 
 This repo shows how an organization might use conftest to validate a variety of
 checks across different repositories using github actions. To do this, we need a
@@ -25,6 +27,14 @@ few different pieces:
 The policies provided here are some examples of using conftest. Before trying
 them out with Github Actions, you can test them out from the commandline. Each
 namespace expects a different input, and is described below.
+
+The main policies are located in the `policy/global` directory, organized by
+namespace. To illustrate per-team namespaces, a `policy/donut-team` directory
+exists, where the fictional Donut Team can add additional checks, either in the
+same namespace, or create namespaces of their own. To use these additional
+policies, this team directory must be passed to conftest with the `--policy`
+flag. When using the Github action (as illustrated in the workflow above), this
+is done through the `extra_args` input.
 
 #### Namespace: `github.repo`
 
