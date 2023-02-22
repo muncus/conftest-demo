@@ -44,4 +44,4 @@ jobs:
           namespace: "github.repo"
           files: "repository.json"
           policy: org-policy-repo/policy/global
-          extra_args: "-p org-policy-repo/policy/teams/donut"
+          extra_args: "--policy org-policy-repo/policy/donut-team"
