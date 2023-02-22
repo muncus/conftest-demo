@@ -21,3 +21,9 @@ warn_squash_merge_settings contains msg if {
   input.squash_merge_commit_title != "PR_TITLE"
   input.squash_merge_commit_message != "PR_BODY"
 }
+
+# This team prefers merge commits, and allows them on all repos.
+# This exception excludes donut-team repos from a global check.
+exception contains x if {
+  x := ["merge_commits"]
+}
